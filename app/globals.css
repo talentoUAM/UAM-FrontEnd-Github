@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* globals.css */
+
+:root {
+  --font-playfair: 'Playfair Display', serif;
+  --font-roboto: 'Roboto', sans-serif;
+}
+/*
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+} */
+
+
+/* lightbox-custom.css */
+.yarl__container.yarl__flex_center {
+  background-color: rgba(0, 0, 0, 0.8) !important; /* Negro con opacidad del 50% */
+}
+.yarl__icon g {
+  fill: #F58634 !important;/* Cambia el color al deseado */
+}
