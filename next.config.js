@@ -7,15 +7,21 @@ const nextConfig = {
     defaultLocale: 'es',    // Idioma por defecto
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: "http",
-        hostname: "localhost", // Dominio del servidor de desarrollo
-        port: "1337",          // Puerto donde corre tu servidor Strapi
-        pathname: "/uploads/**", // Ruta específica para las imágenes
-      },
-    ],
-  },
+  remotePatterns: [
+    {
+      protocol: "http",
+      hostname: "localhost",
+      port: "1337",
+      pathname: "/uploads/**",
+    },
+    {
+      protocol: "https",
+      hostname: "uam-backend-strapi-github-production.up.railway.app",
+      pathname: "/uploads/**",
+    },
+  ],
+},
+
 };
 
 module.exports = nextConfig; // Cambiar exportación a CommonJS
