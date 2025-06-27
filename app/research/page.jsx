@@ -225,7 +225,7 @@ const Investigation = () => {
                         {researchPublicationsData.map((publication, index) => (  
                             <div
                                 key={index}
-                                className={`w-full grid justify-center items-center border border-accent-blue gap-0 bg-white group hover:bg-accent-blue p-2 transition-all duration-300`}
+                                className={`w-full min-h-[269px] grid justify-center items-center border border-accent-blue gap-0 bg-accent-blue/10 group hover:bg-accent-blue p-2 transition-all duration-300`}
                             >
                                 {/* Image */}
                                 <div className="w-full h-full flex justify-center items-center">
