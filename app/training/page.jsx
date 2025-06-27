@@ -124,7 +124,7 @@ const Training = () => {
                             {program.image && program.image.url && (
                                 <div className="w-full md:w-1/2 min-h-[300px] md:min-h-[250px] h-full relative overflow-hidden">
                                 <Image
-                                    src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${program.image.url}`}
+                                    src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${program.image.url}`}
                                     alt={program.title || 'Training Image'}
                                     layout="fill" // Llenar todo el contenedor
                                     objectFit="cover" // Aplicar el comportamiento de "cover"
@@ -179,7 +179,7 @@ const Training = () => {
                                             {program.pdf && program.pdf.url && (
                                             <div className="">
                                                 <a
-                                                href={`${process.env.NEXT_PUBLIC_STRAPI_URL}${program.pdf.url}`}
+                                                href={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${program.pdf.url}`}
                                                 className="cursor-pointer"
                                                 target="_blank"
                                                 download
