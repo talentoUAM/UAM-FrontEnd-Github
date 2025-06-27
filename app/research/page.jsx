@@ -229,10 +229,10 @@ const Investigation = () => {
                             >
                                 {/* Image */}
                                 <div className="w-full h-full flex justify-center items-center">
-                                    {publication.avatar && (
+                                    {publication.avatar?.url && (
                                         <div className="w-[150px] h-[150px]  relative flex justify-start items-center border-2 border-accent rounded-full overflow-hidden">
                                             <Image
-                                                src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${publication.avatar.url}`}
+                                                src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${publication.avatar.url}`}
                                                 alt={publication.title}
                                                 layout="fill" // Llenar todo el contenedor
                                                 objectFit="cover" // Aplicar el comportamiento de "cover"
