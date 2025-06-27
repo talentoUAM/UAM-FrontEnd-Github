@@ -108,7 +108,7 @@ const Training = () => {
                     {/* Programas de Formación posgrado */}
                     
                     <div className="w-full grid grid-cols-1">
-                        <div className="w-full flex justify-start items-center mb-[30px] md:mb-[40px">
+                        <div className="w-full min-h-[445px] flex justify-start items-center mb-[30px] md:mb-[40px]">
                             <h2 className="relative inline-block text-[24px] leading-[28px] md:text-[32px] md:leading-[36px] lg:text-[40px] lg:leading-[48px] font-roboto font-semibold text-primary uppercase after:content-[''] after:block after:w-[80px] after:h-[4px] after:bg-accent after:mt-[10px]  ">
                                 {locale === 'es' ? 'Programas de Formación posgrado' : 'Postgraduate Training Programs'}
                             </h2>
@@ -122,7 +122,7 @@ const Training = () => {
                             >
                             {/* Image */}
                             {program.image?.url && (
-                                <div className="w-full md:w-1/2 min-h-[300px] md:min-h-[250px] h-full relative overflow-hidden">
+                                <div className="w-full md:w-1/2 h-full min-h-[300px] md:min-h-[250px] h-full relative overflow-hidden">
                                 <Image
                                     src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${program.image.url}`}
                                     alt={program.title || 'Training Image'}
