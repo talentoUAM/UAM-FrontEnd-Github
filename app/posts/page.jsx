@@ -127,7 +127,7 @@ const PostsPage = () => {
                   <Image
                     src={
                       post.heroImage?.url
-                        ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${post.heroImage.url}`
+                        ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${post.heroImage.url}`
                         : "/assets/home/poster/hero-video-poster.jpg"
                     }
                     alt={

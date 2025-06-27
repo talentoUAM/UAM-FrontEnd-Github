@@ -47,7 +47,7 @@ const About = () => {
                 {image && (
                     <Image
                         className="w-full h-full object-cover"
-                        src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${pageAboutData.image.url}`} 
+                        src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageAboutData.image.url}`} 
                         fill
                         priority
                         alt="Hero Image"
@@ -111,7 +111,7 @@ const About = () => {
                             {block.Image && (
                                 <div className="w-full md:w-1/2 min-h-[300px] md:min-h-[250px] h-full relative overflow-hidden">
                                     <Image
-                                        src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${block.Image.url}`}
+                                        src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${block.Image.url}`}
                                         alt={block.title}
                                         layout="fill" // Llenar todo el contenedor
                                         objectFit="cover" // Aplicar el comportamiento de "cover"
@@ -163,7 +163,7 @@ const About = () => {
                             {/* Avatar */}
                             <div className="w-48 h-48 border-4  border-accent-blue rounded-full overflow-hidden mb-4">
                                 <img
-                                    src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${member.avatar.url}`}
+                                    src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${member.avatar.url}`}
                                     alt={member.name}
                                     className="w-full h-full object-cover"
                                 />
