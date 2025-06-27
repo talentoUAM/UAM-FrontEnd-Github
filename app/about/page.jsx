@@ -44,15 +44,16 @@ const About = () => {
             {/* ABOUT HERO */}
             <div className="relative w-full h-[80dvh] flex flex-col justify-end">
                 {/* Hero Image */}
-                {image && (
+                {image?.url && (
                     <Image
                         className="w-full h-full object-cover"
-                        src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageAboutData.image.url}`} 
+                        src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${image.url}`}
                         fill
                         priority
                         alt="Hero Image"
                     />
                 )}
+
 
                 {/* Overlay */}
                 <div className="absolute flex justify-center items-center w-full h-[200px] xxs:h-[300px] md:w-[45%] md:h-full bottom-0 md:inset-0 ">
@@ -108,7 +109,7 @@ const About = () => {
                             } items-start  bg-white py-2 `}
                         >
                             {/* Image */}
-                            {block.Image && (
+                            {block.Image?.url && (
                                 <div className="w-full md:w-1/2 min-h-[300px] md:min-h-[250px] h-full relative overflow-hidden">
                                     <Image
                                         src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${block.Image.url}`}
