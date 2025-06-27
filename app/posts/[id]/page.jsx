@@ -82,7 +82,7 @@ const SinglePost = () => {
   // Definir las imágenes de la galería o un array vacío
   const galleryImages =
     postGallery?.map((image) => ({
-      src: `${process.env.NEXT_PUBLIC_STRAPI_URL}${image.url}`,
+      src: `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${image.url}`,
       alt: image.alternativeText || `Imagen de galería`,
     })) || [];
 
@@ -105,7 +105,7 @@ const SinglePost = () => {
         <div className="w-full lg:w-1/2 order-2 lg:order-1">
         {heroImage && (
           <Image
-            src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${heroImage.url}`}
+            src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${heroImage.url}`}
             alt={heroImage.alternativeText || "Imagen del post"}
             width={800}
             height={400}
