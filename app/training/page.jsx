@@ -121,7 +121,7 @@ const Training = () => {
                             } items-start bg-white py-2`}
                             >
                             {/* Image */}
-                            {program.image && program.image?.url && (
+                            {program.image?.url && (
                                 <div className="w-full md:w-1/2 min-h-[300px] md:min-h-[250px] h-full relative overflow-hidden">
                                 <Image
                                     src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${program.image.url}`}
