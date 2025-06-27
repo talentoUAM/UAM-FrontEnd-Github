@@ -162,13 +162,22 @@ const About = () => {
                             className="w-full bg-accent-blue/70 shadow-md  p-6 flex flex-col items-center text-center"
                         >
                             {/* Avatar */}
-                            <div className="w-48 h-48 border-4  border-accent-blue rounded-full overflow-hidden mb-4">
+                            {/* <div className="w-48 h-48 border-4  border-accent-blue rounded-full overflow-hidden mb-4">
                                 <img
                                     src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${member.avatar.url}`}
                                     alt={member.name}
                                     className="w-full h-full object-cover"
                                 />
-                            </div>
+                            </div> */}
+                            {member.avatar?.url && (
+                                <div className="w-48 h-48 border-4 border-accent-blue rounded-full overflow-hidden mb-4">
+                                    <img
+                                    src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${member.avatar.url}`}
+                                    alt={member.name}
+                                    className="w-full h-full object-cover"
+                                    />
+                                </div>
+                            )}
 
                             {/* Name */}
                             <h3 className="text-accent-blue text-[24px] font-roboto font-bold mb-2">{member.name}</h3>
