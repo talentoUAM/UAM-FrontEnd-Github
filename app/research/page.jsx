@@ -46,10 +46,10 @@ const Investigation = () => {
             {/* RESEARC HERO */}
             <div className="relative w-full h-[80dvh] flex flex-col justify-end">
                 {/* Hero Image */}
-                {image && (
+                {image?.url && (
                     <Image
                         className="w-full h-full object-cover"
-                        src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${pageResearchData.image.url}`} 
+                        src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${image.url}`}
                         fill
                         priority
                         alt="Hero Image"
