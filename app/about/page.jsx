@@ -60,7 +60,7 @@ const About = () => {
     };
 
     waitForAllImages().then(() => {
-      setTimeout(() => setIsReady(true), 300); // Ligero retardo para asegurar el render final
+      setTimeout(() => setIsReady(true), 1500); // Ligero retardo para asegurar el render final
     });
   }, [
     pageAboutData,
