@@ -22,7 +22,35 @@ const About = () => {
     const { locale, pageAboutData, pageAboutBlocks, pageAboutTeamData, pageAboutTeamMembersData, 
     pageAboutTeamColaboratorsData } = useGlobalState();
 
-    const [isPageLoaded, setIsPageLoaded] = useState(false);
+    const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    const dataReady =
+      pageAboutData &&
+      pageAboutBlocks &&
+      pageAboutTeamData &&
+      pageAboutTeamMembersData &&
+      pageAboutTeamColaboratorsData;
+
+    if (!dataReady) return;
+
+    const onLoad = () => setIsReady(true);
+
+    if (document.readyState === 'complete') {
+      onLoad();
+    } else {
+      window.addEventListener('load', onLoad);
+      return () => window.removeEventListener('load', onLoad);
+    }
+  }, [
+    pageAboutData,
+    pageAboutBlocks,
+    pageAboutTeamData,
+    pageAboutTeamMembersData,
+    pageAboutTeamColaboratorsData
+  ]);
+
+  if (!isReady) return <LoaderComponentInt />;
 
     // console.log('pageAboutBlocks', pageAboutBlocks);
     // console.log('pageAboutTeamData', pageAboutTeamData);
@@ -35,19 +63,7 @@ const About = () => {
         return <p>Loading...</p>;
     }
 
-    const { title, image, introTextContent } = pageAboutData;
-
-    useEffect(() => {
-    const handleLoaded = () => setIsPageLoaded(true);
-
-    if (document.readyState === "complete") {
-            handleLoaded();
-        } else {
-        window.addEventListener("load", handleLoaded);
-            return () => window.removeEventListener("load", handleLoaded);
-        }
-    }, []);
-    if (!isPageLoaded) return <LoaderWrapperInt />;
+    
     return (
          
        
