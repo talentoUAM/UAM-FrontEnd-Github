@@ -52,6 +52,7 @@ const Training = () => {
                         src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${image.url}`}
                         fill
                         priority
+                        loading="eager"
                         alt="Hero Image"
                     />
                 )}

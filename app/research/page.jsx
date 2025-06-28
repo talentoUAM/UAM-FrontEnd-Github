@@ -52,6 +52,7 @@ const Investigation = () => {
                         src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${image.url}`}
                         fill
                         priority
+                        loading="eager"
                         alt="Hero Image"
                     />
                 )}
@@ -237,6 +238,7 @@ const Investigation = () => {
                                                 layout="fill" // Llenar todo el contenedor
                                                 objectFit="cover" // Aplicar el comportamiento de "cover"
                                                 priority // Asegurar la carga optimizada
+                                                loading="eager"
                                             /> 
                                         </div>
                                         

@@ -129,6 +129,7 @@ const Training = () => {
                                     layout="fill" // Llenar todo el contenedor
                                     objectFit="cover" // Aplicar el comportamiento de "cover"
                                     priority // Asegurar la carga optimizada
+                                    loading="eager"
                                 />
                                 </div>
                             )}
