@@ -19,7 +19,7 @@ import LoaderComponentInt from "@/components/extraComponents/LoaderComponentInt"
 
 
 const About = () => {
-    const {
+  const {
     locale,
     pageAboutData,
     pageAboutBlocks,
@@ -44,19 +44,24 @@ const About = () => {
 
     if (!dataReady) return;
 
-    const waitForImages = () => {
-      const images = Array.from(document.querySelectorAll("img"));
-      const imagePromises = images.map((img) => {
-        if (img.complete && img.naturalHeight !== 0) return Promise.resolve();
+    const waitForAllImages = () => {
+      const allImages = Array.from(document.images);
+      const promises = allImages.map((img) => {
         return new Promise((resolve) => {
-          img.onload = resolve;
-          img.onerror = resolve;
+          if (img.complete && img.naturalHeight !== 0) {
+            resolve();
+          } else {
+            img.onload = resolve;
+            img.onerror = resolve;
+          }
         });
       });
-      return Promise.all(imagePromises);
+      return Promise.all(promises);
     };
 
-    waitForImages().then(() => setIsReady(true));
+    waitForAllImages().then(() => {
+      setTimeout(() => setIsReady(true), 300); // Ligero retardo para asegurar el render final
+    });
   }, [
     pageAboutData,
     pageAboutBlocks,
