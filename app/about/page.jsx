@@ -11,7 +11,7 @@ import { useGlobalState } from "@/context/GlobalStateContext";
 //IMPORTS HOOKS:
 //IMPORTS VARIANTS:
 //IMPORTS COMPONENTS:
-import LoaderWrapperInt from "@/components/extraComponents/LoaderWrapperInt";
+import LoaderComponentInt from "@/components/extraComponents/LoaderComponentInt";
 //IMPORT ICONS:
 //IMPORTS IMAGES:
 //IMPORTS CSS:
