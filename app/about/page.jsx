@@ -30,7 +30,6 @@ const About = () => {
 
   const [isReady, setIsReady] = useState(false);
 
-  // Extraemos los campos necesarios de pageAboutData
   const image = pageAboutData?.image;
   const title = pageAboutData?.title;
   const introTextContent = pageAboutData?.introTextContent;
@@ -45,14 +44,19 @@ const About = () => {
 
     if (!dataReady) return;
 
-    const onLoad = () => setIsReady(true);
+    const waitForImages = () => {
+      const images = Array.from(document.querySelectorAll("img"));
+      const imagePromises = images.map((img) => {
+        if (img.complete && img.naturalHeight !== 0) return Promise.resolve();
+        return new Promise((resolve) => {
+          img.onload = resolve;
+          img.onerror = resolve;
+        });
+      });
+      return Promise.all(imagePromises);
+    };
 
-    if (document.readyState === 'complete') {
-      onLoad();
-    } else {
-      window.addEventListener('load', onLoad);
-      return () => window.removeEventListener('load', onLoad);
-    }
+    waitForImages().then(() => setIsReady(true));
   }, [
     pageAboutData,
     pageAboutBlocks,
@@ -65,6 +69,7 @@ const About = () => {
 
   const sortedMembersData = pageAboutTeamMembersData.sort((a, b) => a.id - b.id);
   const sortedColaboratorsData = pageAboutTeamColaboratorsData.sort((a, b) => a.id - b.id);
+
 
 
     
