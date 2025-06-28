@@ -11,7 +11,7 @@ import { useGlobalState } from "@/context/GlobalStateContext";
 //IMPORTS HOOKS:
 //IMPORTS VARIANTS:
 //IMPORTS COMPONENTS:
-import LoaderWrapper from "@/components/extraComponents/LoaderWrapper";
+import LoaderWrapperInt from "@/components/extraComponents/LoaderWrapperInt";
 //IMPORT ICONS:
 //IMPORTS IMAGES:
 //IMPORTS CSS:
@@ -47,7 +47,7 @@ const About = () => {
             return () => window.removeEventListener("load", handleLoaded);
         }
     }, []);
-    if (!isPageLoaded) return <LoaderWrapper />;
+    if (!isPageLoaded) return <LoaderWrapperInt />;
     return (
          
        
