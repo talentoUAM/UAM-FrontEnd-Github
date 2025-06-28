@@ -11,6 +11,7 @@ import { useGlobalState } from "@/context/GlobalStateContext";
 //IMPORTS HOOKS:
 //IMPORTS VARIANTS:
 //IMPORTS COMPONENTS:
+import LoaderWrapper from "@/components/extraComponents/LoaderWrapper";
 //IMPORT ICONS:
 //IMPORTS IMAGES:
 //IMPORTS CSS:
@@ -18,7 +19,11 @@ import { useGlobalState } from "@/context/GlobalStateContext";
 
 
 const About = () => {
-    const { locale, pageAboutData, pageAboutBlocks, pageAboutTeamData, pageAboutTeamMembersData, pageAboutTeamColaboratorsData } = useGlobalState();
+    const { locale, pageAboutData, pageAboutBlocks, pageAboutTeamData, pageAboutTeamMembersData, 
+    pageAboutTeamColaboratorsData } = useGlobalState();
+
+    const [isPageLoaded, setIsPageLoaded] = useState(false);
+
     // console.log('pageAboutBlocks', pageAboutBlocks);
     // console.log('pageAboutTeamData', pageAboutTeamData);
     // console.log('pageAboutTeamColaboratorsData', pageAboutTeamColaboratorsData);
@@ -32,7 +37,20 @@ const About = () => {
 
     const { title, image, introTextContent } = pageAboutData;
 
+    useEffect(() => {
+    const handleLoaded = () => setIsPageLoaded(true);
+
+    if (document.readyState === "complete") {
+            handleLoaded();
+        } else {
+        window.addEventListener("load", handleLoaded);
+            return () => window.removeEventListener("load", handleLoaded);
+        }
+    }, []);
+    if (!isPageLoaded) return <LoaderWrapper />;
     return (
+         
+       
         <motion.section
             className="min-h-[100dvh] flex flex-col justify-start items-start overflow-x-hidden max-w-[1920px] mx-auto pt-[70px] mb-[50px] z-10"
             initial={{ opacity: 0 }}
@@ -295,6 +313,7 @@ const About = () => {
             </div>
 
         </motion.section>
+         
     );
 };
 

@@ -27,7 +27,7 @@ import Loader from "@/components/extraComponents/LoaderComponent";
 export default function Home() {
 
   const { isMobile, setIsMobile, isLoading, setIsLoading } = useGlobalState();
-
+  
   
 
     useEffect(() => {
