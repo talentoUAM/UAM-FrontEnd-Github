@@ -65,7 +65,7 @@ const HomeAboutSectionComponent = () => {
 
             {/* Botón para ver todas las noticias */}
             <div className="w-full flex justify-center items-center mt-2 mb-8">
-                <CustomButton url="/About">
+                <CustomButton url="/about">
                     {locale === 'es' ? 'SABER MAS ACERCA DE TALENTO UAM' : 'LEARN MORE ABOUT UAM TALENT'}
                 </CustomButton>
             </div>

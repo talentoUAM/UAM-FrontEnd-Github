@@ -144,7 +144,7 @@ const About = () => {
                                         <Image
                                             src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${block.Image.url}`}
                                             alt={block.title}
-                                            layout="fill" // Llenar todo el contenedor
+                                            fill
                                             objectFit="cover" // Aplicar el comportamiento de "cover"
                                             priority // Asegurar la carga optimizada
                                             loading="eager"

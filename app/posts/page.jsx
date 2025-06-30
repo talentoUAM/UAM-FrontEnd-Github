@@ -7,6 +7,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from 'framer-motion';
 //IMPORTS GLOBAL STATES:
 import { useGlobalState } from "@/context/GlobalStateContext";
+import LoaderComponentInt from "@/components/extraComponents/LoaderComponentInt";
 //IMPORT ICONS:
 import { IoTriangle } from "react-icons/io5";
 import Pagination from "@/components/extraComponents/PaginationComponent";
