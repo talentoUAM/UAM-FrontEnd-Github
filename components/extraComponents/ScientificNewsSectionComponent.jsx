@@ -128,10 +128,12 @@ const ScientificNewsSectionComponent = () => {
     const { postsData } = useGlobalState();
     const { homeTitleSectionsData } = useGlobalState();
 
-    // Filtrar los posts que pertenecen a la categoría científica
+    // Filtrar los posts que pertenecen a la categoría científica y investigacion
     const filteredPosts = postsData.filter(post => 
         post.news_category?.category?.toLowerCase() === 'scientific' || 
-        post.news_category?.category?.toLowerCase() === 'científica'
+        post.news_category?.category?.toLowerCase() === 'científica' ||
+        post.news_category?.category?.toLowerCase() === 'investigation' || 
+        post.news_category?.category?.toLowerCase() === 'investigacion' ||
     );
 
     // Ordenar los posts filtrados por fecha de publicación (descendente)
