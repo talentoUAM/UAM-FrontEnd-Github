@@ -2,7 +2,7 @@
 'use client';
 //IMPORTS REACT/NEXT DEPENDENCIES:
 //IMPORTS REACT/NEXT DEPENDENCIES:
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 //IMPORTS EXT DEPENDENCIES:
@@ -32,18 +32,26 @@ const Transfer = () => {
         return <p>Loading...</p>;
     }
 
-    const [isReady, setIsReady] = useState(false);
+    const [isImageLoaded, setIsImageLoaded] = useState(false);
+    const [isImageVisible, setIsImageVisible] = useState(false);
+
+    const imageRef = useRef(null);
+    const isInView = useInView(imageRef, { once: true });
 
     useEffect(() => {
-    if (!pageTransferData || !pageTransferData.image?.url) return;
+        if (isInView) {
+            setIsImageVisible(true);
+        }
+    }, [isInView]);
 
-    const img = new window.Image(); // usa el constructor global, no el importado
-    img.src = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageTransferData.image.url}`;
-    img.onload = () => {
-        setIsReady(true);
-    };
+    useEffect(() => {
+        if (!pageTransferData?.image?.url) return;
+        const img = new window.Image();
+        img.src = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageTransferData.image.url}`;
+        img.onload = () => setIsImageLoaded(true);
     }, [pageTransferData]);
 
+    const isReady = isImageLoaded && isImageVisible;
     if (!isReady) return <LoaderComponentInt />;
    
     const { title, image, introTextContent, inovactionTextContent, conocimientoTextContent, endTextContent } = pageTransferData;
@@ -63,6 +71,7 @@ const Transfer = () => {
                 {/* Hero Image */}
                 {image?.url && (
                     <Image
+                        ref={imageRef}
                         className="w-full h-full object-cover"
                         src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${image.url}`}
                         fill
