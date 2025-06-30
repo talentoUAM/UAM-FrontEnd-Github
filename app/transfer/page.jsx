@@ -35,13 +35,13 @@ const Transfer = () => {
     const [isReady, setIsReady] = useState(false);
 
     useEffect(() => {
-        if (!pageTransferData || !pageTransferData.image?.url) return;
+    if (!pageTransferData || !pageTransferData.image?.url) return;
 
-        const img = new Image();
-        img.src = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageTransferData.image.url}`;
-        img.onload = () => {
+    const img = new window.Image(); // usa el constructor global, no el importado
+    img.src = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageTransferData.image.url}`;
+    img.onload = () => {
         setIsReady(true);
-        };
+    };
     }, [pageTransferData]);
 
     if (!isReady) return <LoaderComponentInt />;
