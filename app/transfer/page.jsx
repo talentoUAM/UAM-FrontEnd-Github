@@ -2,7 +2,7 @@
 'use client';
 //IMPORTS REACT/NEXT DEPENDENCIES:
 //IMPORTS REACT/NEXT DEPENDENCIES:
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 //IMPORTS EXT DEPENDENCIES:
@@ -23,69 +23,27 @@ import LoaderComponentInt from "@/components/extraComponents/LoaderComponentInt"
 //IMPORT ENV:
 
 const Transfer = () => {
-   const { locale, pageTransferData } = useGlobalState();
-    const [isLoading, setIsLoading] = useState(true);
-    const imageContainerRef = useRef(null);
-    const timeoutRef = useRef(null);
-
-    // Verifica si el elemento está visible en el viewport
-    const isInViewport = (element) => {
-        if (!element) return false;
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.bottom >= 0
-        );
-    };
-
+    const { locale, pageTransferData } = useGlobalState();
+    //  console.log('pageTransferData', pageTransferData );
+    const [IsLoading, setIsLoading] = useState(true)
+     
     useEffect(() => {
-        if (!pageTransferData?.image?.url) return;
-
-        const checkImageLoad = () => {
-            // 1. Verificar si el contenedor está en el viewport
-            const isVisible = isInViewport(imageContainerRef.current);
-            
-            // 2. Verificar si la imagen está cargada
-            const img = new window.Image();
-            img.src = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageTransferData.image.url}`;
-            
-            img.onload = () => {
-                if (isVisible) {
-                    setIsLoading(false);
-                    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-                }
-            };
-
-            img.onerror = () => {
-                setIsLoading(false);
-                if (timeoutRef.current) clearTimeout(timeoutRef.current);
-            };
-        };
-
-        // Timeout de seguridad (8 segundos máximo)
-        timeoutRef.current = setTimeout(() => {
-            setIsLoading(false);
-        }, 8000);
-
-        // Verificación inicial
-        checkImageLoad();
-
-        // Event listeners para scroll y resize
-        window.addEventListener('scroll', checkImageLoad);
-        window.addEventListener('resize', checkImageLoad);
-
-        return () => {
-            window.removeEventListener('scroll', checkImageLoad);
-            window.removeEventListener('resize', checkImageLoad);
-            if (timeoutRef.current) clearTimeout(timeoutRef.current);
-        };
-    }, [pageTransferData]);
-
-    if (!pageTransferData) {
+        // Simulación de una espera de 2 segundos
+        const timer = setTimeout(() => {
+          setIsLoading(false);
+        }, 2000);
+    
+        // Limpieza del timer si el componente se desmonta antes de que termine el tiempo
+        return () => clearTimeout(timer);
+      }, []);
+    // Validación de datos antes de renderizar
+    if ( !pageTransferData && !IsLoading) {
         return <LoaderComponentInt />;
     }
-
+   
     const { title, image, introTextContent, inovactionTextContent, conocimientoTextContent, endTextContent } = pageTransferData;
+
+
     return (
         <>
             {isLoading && <LoaderComponentInt />}
@@ -108,12 +66,6 @@ const Transfer = () => {
                             priority
                             loading="eager"
                             alt="Hero Image"
-                            onLoad={() => {
-                                if (isInViewport(imageContainerRef.current)) {
-                                    setIsLoading(false);
-                                }
-                            }}
-                            onError={() => setIsLoading(false)}
                         />
                     )}
 
