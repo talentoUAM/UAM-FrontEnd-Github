@@ -24,11 +24,8 @@ import LoaderComponentInt from "@/components/extraComponents/LoaderComponentInt"
 
 const Transfer = () => {
     const { locale, pageTransferData } = useGlobalState();
-    //  console.log('pageTransferData', pageTransferData );
-     
-    
-    // Validación de datos antes de renderizar
-    if ( !pageTransferData) {
+
+    if (!pageTransferData) {
         return <p>Loading...</p>;
     }
 
@@ -40,19 +37,24 @@ const Transfer = () => {
 
     useEffect(() => {
         if (isInView) {
-            setIsImageVisible(true);
+        setIsImageVisible(true);
         }
     }, [isInView]);
 
     useEffect(() => {
         if (!pageTransferData?.image?.url) return;
+
         const img = new window.Image();
         img.src = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageTransferData.image.url}`;
         img.onload = () => setIsImageLoaded(true);
+        img.onerror = () => {
+        console.warn("Error cargando la imagen");
+        setIsImageLoaded(true); // opcional para no bloquear la UI
+        };
     }, [pageTransferData]);
 
     const isReady = isImageLoaded && isImageVisible;
-    if (!isReady) return <LoaderComponentInt />;
+    if (!isReady) return <LoaderComponentInt />
    
     const { title, image, introTextContent, inovactionTextContent, conocimientoTextContent, endTextContent } = pageTransferData;
 
@@ -68,17 +70,18 @@ const Transfer = () => {
         >   
             {/* Trining HERO */}
             <div className="relative w-full h-[80dvh] flex flex-col justify-end">
-                {/* Hero Image */}
+                {/* Imagen Hero con ref en el contenedor */}
                 {image?.url && (
-                    <Image
-                        ref={imageRef}
+                    <div ref={imageRef} className="w-full h-full">
+                        <Image
                         className="w-full h-full object-cover"
                         src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${image.url}`}
                         fill
                         priority
                         loading="eager"
                         alt="Hero Image"
-                    />
+                        />
+                    </div>
                 )}
 
                 {/* Overlay */}
