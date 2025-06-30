@@ -190,11 +190,12 @@ const ScientificNewsSectionComponent = () => {
                         <div key={post.id} className="bg-white flex flex-col gap-[10px] group">
                             <Link key={post.id} href={`/posts/${post.id}`}>
                                 <div className="overflow-hidden">
+                                    
                                     <Image
                                         src={
                                             post.heroImage?.url
-                                                ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${post.heroImage.url}`
-                                                : "/assets/home/poster/hero-video-poster.jpg"
+                                            ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${post.heroImage.url}`
+                                            : "/assets/home/poster/hero-video-poster.jpg"
                                         }
                                         alt={post.heroImage?.alternativeText || post.title || "Imagen de artículo secundario"}
                                         width={400}
