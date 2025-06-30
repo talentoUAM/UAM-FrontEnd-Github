@@ -25,13 +25,25 @@ import LoaderComponentInt from "@/components/extraComponents/LoaderComponentInt"
 const Transfer = () => {
     const { locale, pageTransferData } = useGlobalState();
 
-    if (!pageTransferData) return <p>Loading...</p>;
-
     const [isImageLoaded, setIsImageLoaded] = useState(false);
+    const [shouldCheckInView, setShouldCheckInView] = useState(false);
     const imageRef = useRef(null);
-    const isImageInView = useInView(imageRef, { once: true });
 
-    const isReady = isImageLoaded && isImageInView;
+    const isImageInView = useInView(imageRef, {
+    once: true,
+    amount: 0.1,
+    fallbackInView: false,
+    });
+
+    useEffect(() => {
+    if (isImageLoaded) {
+        setTimeout(() => {
+        setShouldCheckInView(true);
+        }, 50); // esperar al próximo tick
+    }
+    }, [isImageLoaded]);
+
+    const isReady = isImageLoaded && shouldCheckInView && isImageInView;
     if (!isReady) return <LoaderComponentInt />;
    
     const { title, image, introTextContent, inovactionTextContent, conocimientoTextContent, endTextContent } = pageTransferData;
@@ -52,17 +64,17 @@ const Transfer = () => {
                 {image?.url && (
                     <div ref={imageRef} className="w-full h-full">
                         <Image
-                        className="w-full h-full object-cover"
-                        src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${image.url}`}
-                        fill
-                        priority
-                        loading="eager"
-                        alt="Hero Image"
-                        onLoad={() => setIsImageLoaded(true)}
-                        onError={() => {
-                            console.warn("Error cargando imagen");
-                            setIsImageLoaded(true); // opcional
-                        }}
+                            className="w-full h-full object-cover"
+                            src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${image.url}`}
+                            fill
+                            priority
+                            loading="eager"
+                            alt="Hero Image"
+                            onLoad={() => setIsImageLoaded(true)}
+                            onError={() => {
+                                console.warn("Error cargando imagen");
+                                setIsImageLoaded(true);
+                            }}
                         />
                     </div>
                 )}
