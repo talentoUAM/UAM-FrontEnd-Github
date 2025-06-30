@@ -9,7 +9,7 @@ import CustomButton from "../buttons/CustomButton";
 
 const HomeAboutSectionComponent = () => {
     const { homeAboutSectionData, locale } = useGlobalState();
-    console.log('homeAboutSectionData', homeAboutSectionData)
+    //console.log('homeAboutSectionData', homeAboutSectionData)
 
     return (
         <div className="w-full flex flex-col justify-start items-start gap-[20px] px-[10px] mb-[30px] sm:px-[20px] md:mb-0 xl:px-[50px]">

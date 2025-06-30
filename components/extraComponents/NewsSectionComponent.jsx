@@ -12,7 +12,8 @@ import CustomButton from '../buttons/CustomButton';
 import HeaderSectionComponent from './HeaderSectionComponent';
 
 const NewsSectionComponent = () => {
-    const { postsData } = useGlobalState(); console.log('postsData-->',postsData)
+    const { postsData } = useGlobalState(); 
+    //console.log('postsData-->',postsData)
     const { homeTitleSectionsData } = useGlobalState();
 
     // Ordenar los posts por fecha de publicación (descendente)
