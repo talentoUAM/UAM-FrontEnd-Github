@@ -2,7 +2,7 @@
 'use client';
 //IMPORTS REACT/NEXT DEPENDENCIES:
 //IMPORTS REACT/NEXT DEPENDENCIES:
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 //IMPORTS EXT DEPENDENCIES:
@@ -24,27 +24,17 @@ import LoaderComponentInt from "@/components/extraComponents/LoaderComponentInt"
 
 const Transfer = () => {
     const { locale, pageTransferData } = useGlobalState();
-
+    //  console.log('pageTransferData', pageTransferData );
+     
+    
     const [isImageLoaded, setIsImageLoaded] = useState(false);
-    const [shouldCheckInView, setShouldCheckInView] = useState(false);
-    const imageRef = useRef(null);
+    const imageWrapperRef = useRef(null);
+    const isInView = useInView(imageWrapperRef, { once: true });
 
-    const isImageInView = useInView(imageRef, {
-    once: true,
-    amount: 0.1,
-    fallbackInView: false,
-    });
+    // Mostrar loader hasta que la imagen esté cargada y visible
+    const isReady = isImageLoaded && isInView;
 
-    useEffect(() => {
-    if (isImageLoaded) {
-        setTimeout(() => {
-        setShouldCheckInView(true);
-        }, 50); // esperar al próximo tick
-    }
-    }, [isImageLoaded]);
-
-    const isReady = isImageLoaded && shouldCheckInView && isImageInView;
-    if (!isReady) return <LoaderComponentInt />;
+    if (!pageTransferData || !isReady) return <LoaderComponentInt />;
    
     const { title, image, introTextContent, inovactionTextContent, conocimientoTextContent, endTextContent } = pageTransferData;
 
@@ -60,20 +50,20 @@ const Transfer = () => {
         >   
             {/* Trining HERO */}
             <div className="relative w-full h-[80dvh] flex flex-col justify-end">
-                {/* Imagen Hero con ref en el contenedor */}
+                {/* Hero Image */}
                 {image?.url && (
-                    <div ref={imageRef} className="w-full h-full">
+                    <div ref={imageWrapperRef} className="w-full h-full relative">
                         <Image
-                            className="w-full h-full object-cover"
                             src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${image.url}`}
                             fill
+                            className="object-cover"
+                            alt="Hero Image"
                             priority
                             loading="eager"
-                            alt="Hero Image"
                             onLoad={() => setIsImageLoaded(true)}
                             onError={() => {
-                                console.warn("Error cargando imagen");
-                                setIsImageLoaded(true);
+                                console.warn('Error cargando la imagen');
+                                setIsImageLoaded(true); // opcional
                             }}
                         />
                     </div>
