@@ -19,16 +19,20 @@ import LoaderComponentInt from "@/components/extraComponents/LoaderComponentInt"
 
 
 const About = () => {
-  const {
-    locale,
-    pageAboutData,
-    pageAboutBlocks,
-    pageAboutTeamData,
-    pageAboutTeamMembersData,
-    pageAboutTeamColaboratorsData
-  } = useGlobalState();
+    const {
+        locale,
+        pageAboutData,
+        pageAboutBlocks,
+        pageAboutTeamData,
+        pageAboutTeamMembersData,
+        pageAboutTeamColaboratorsData
+    } = useGlobalState();
 
-  const [isLoading, setIsLoading] = useState(true)
+    const image = pageAboutData?.image;
+    const title = pageAboutData?.title;
+    const introTextContent = pageAboutData?.introTextContent;
+
+    const [isLoading, setIsLoading] = useState(true)
      
     useEffect(() => {
         let timer;

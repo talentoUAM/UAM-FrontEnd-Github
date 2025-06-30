@@ -71,11 +71,11 @@ const PostsPage = () => {
     setCurrentPage(page);
   };
 
-  // Reinicia el filtro al cambiar el idioma
-  useEffect(() => {
-    setSelectedCategory("all");
-    setCurrentPage(1); // Reinicia la paginación al cambiar el idioma
-  }, [pagePostsData]); // Cambiar a "all" cuando pagePostsData cambie (indica cambio de idioma)
+      // Reinicia el filtro al cambiar el idioma
+      useEffect(() => {
+        setSelectedCategory("all");
+        setCurrentPage(1); // Reinicia la paginación al cambiar el idioma
+      }, [pagePostsData]); // Cambiar a "all" cuando pagePostsData cambie (indica cambio de idioma)
 
   return (
     <>
