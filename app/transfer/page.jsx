@@ -6,7 +6,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 //IMPORTS EXT DEPENDENCIES:
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 //IMPORTS GLOBAL STATES:
 import { useGlobalState } from "@/context/GlobalStateContext";
 import CustomButton from "@/components/buttons/CustomButton";
