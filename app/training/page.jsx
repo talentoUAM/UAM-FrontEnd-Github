@@ -15,6 +15,7 @@ import { TfiDownload } from "react-icons/tfi";
 //IMPORTS HOOKS:
 //IMPORTS VARIANTS:
 //IMPORTS COMPONENTS:
+import LoaderComponentInt from "@/components/extraComponents/LoaderComponentInt";
 //IMPORT ICONS:
 //IMPORTS IMAGES:
 //IMPORTS CSS:
@@ -29,6 +30,34 @@ const Training = () => {
     if ( !pageTrainingData || !trainingProgramsData || !trainingPostgradeData ) {
         return <p>Loading...</p>;
     }
+
+    const [isReady, setIsReady] = useState(false);
+
+    useEffect(() => {
+        const dataReady = pageTrainingData && trainingProgramsData && trainingPostgradeData;
+        if (!dataReady) return;
+
+        const waitForAllImages = () => {
+            const allImages = Array.from(document.images);
+            const promises = allImages.map((img) => {
+                return new Promise((resolve) => {
+                    if (img.complete && img.naturalHeight !== 0) {
+                        resolve();
+                    } else {
+                        img.onload = resolve;
+                        img.onerror = resolve;
+                    }
+                });
+            });
+            return Promise.all(promises);
+        };
+
+        waitForAllImages().then(() => {
+            setTimeout(() => setIsReady(true), 1500);
+        });
+    }, [pageTrainingData, trainingProgramsData, trainingPostgradeData]);
+
+    if (!isReady) return <LoaderComponentInt />;
     
     const sortedTrainingProgramsData = trainingProgramsData.sort((a, b) => b.id - a.id);
     const sortedTrainingPostgradeData = trainingPostgradeData.sort((a, b) => a.id - b.id);
@@ -53,6 +82,7 @@ const Training = () => {
                         src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${image.url}`}
                         fill
                         priority
+                        loading="eager"
                         alt="Hero Image"
                     />
                 )}

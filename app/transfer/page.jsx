@@ -16,12 +16,13 @@ import { TfiDownload } from "react-icons/tfi";
 //IMPORTS HOOKS:
 //IMPORTS VARIANTS:
 //IMPORTS COMPONENTS:
+import LoaderComponentInt from "@/components/extraComponents/LoaderComponentInt";
 //IMPORT ICONS:
 //IMPORTS IMAGES:
 //IMPORTS CSS:
 //IMPORT ENV:
 
-const Training = () => {
+const Transfer = () => {
     const { locale, pageTransferData } = useGlobalState();
     //  console.log('pageTransferData', pageTransferData );
      
@@ -30,6 +31,20 @@ const Training = () => {
     if ( !pageTransferData) {
         return <p>Loading...</p>;
     }
+
+    const [isReady, setIsReady] = useState(false);
+
+    useEffect(() => {
+        if (!pageTransferData || !pageTransferData.image?.url) return;
+
+        const img = new Image();
+        img.src = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageTransferData.image.url}`;
+        img.onload = () => {
+        setIsReady(true);
+        };
+    }, [pageTransferData]);
+
+    if (!isReady) return <LoaderComponentInt />;
    
     const { title, image, introTextContent, inovactionTextContent, conocimientoTextContent, endTextContent } = pageTransferData;
 
@@ -283,4 +298,4 @@ const Training = () => {
     );
 };
 
-export default Training;
+export default Transfer;
