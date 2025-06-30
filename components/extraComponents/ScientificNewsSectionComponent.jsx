@@ -154,7 +154,7 @@ const ScientificNewsSectionComponent = () => {
                                 <Image
                                     src={
                                         mainPost.heroImage?.url
-                                            ? `${process.env.process.env.NEXT_PUBLIC_STRAPI_API_URL}${mainPost.heroImage.url}`
+                                            ? `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${mainPost.heroImage.url}`
                                             : "/assets/home/poster/hero-video-poster.jpg"
                                     }
                                     alt={mainPost.heroImage?.alternativeText || mainPost.title || "Imagen del artículo principal"}
