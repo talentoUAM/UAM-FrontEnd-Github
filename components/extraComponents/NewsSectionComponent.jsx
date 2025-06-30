@@ -25,7 +25,9 @@ const NewsSectionComponent = () => {
     return (
         <section className="w-full flex flex-col justify-start items-center gap-[30px] p-[10px] sm:p-[20px] xl:p-[40px]">
             <HeaderSectionComponent text={homeTitleSectionsData.newsUAMsection} />
-
+            <h1 className="text-[30px] leading-[30px] font-playfair font-bold text-black">
+                 copomponente actualidad UAM !!!
+            </h1>
             <div className="w-full grid lg:grid-rows-2 gap-8">
                 {/* Artículo principal */}
                 {mainPost && (
