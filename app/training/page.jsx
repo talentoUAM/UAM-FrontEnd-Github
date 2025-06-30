@@ -72,6 +72,7 @@ const Training = () => {
                             alt="Hero Image"
                         />
                     )}
+                    
 
                     {/* Overlay */}
                     <div className="absolute flex justify-center items-center w-full h-[200px] xxs:h-[300px] md:w-[45%] md:h-full bottom-0 md:inset-0 ">
