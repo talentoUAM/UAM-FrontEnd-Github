@@ -32,6 +32,45 @@ const Investigation = () => {
         return <p>Loading...</p>;
     }
 
+    const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    const dataReady = pageResearchData &&
+      researchLinesData &&
+      researchFeaturesData &&
+      researchPublicationsData &&
+      researchTesisData;
+
+    if (!dataReady) return;
+
+    const waitForAllImages = () => {
+      const allImages = Array.from(document.images);
+      const promises = allImages.map((img) => {
+        return new Promise((resolve) => {
+          if (img.complete && img.naturalHeight !== 0) {
+            resolve();
+          } else {
+            img.onload = resolve;
+            img.onerror = resolve;
+          }
+        });
+      });
+      return Promise.all(promises);
+    };
+
+    waitForAllImages().then(() => {
+      setTimeout(() => setIsReady(true), 1500); // Asegura que todas las imágenes cargaron
+    });
+  }, [
+    pageResearchData,
+    researchLinesData,
+    researchFeaturesData,
+    researchPublicationsData,
+    researchTesisData
+  ]);
+
+  if (!isReady) return <LoaderComponentInt />;
+
     const { title, image, introTextContent, introScientificPublication, doctoralTheses, endTextContent } = pageResearchData;
 
     return (

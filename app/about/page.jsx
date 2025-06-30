@@ -153,7 +153,7 @@ const About = () => {
                     {pageAboutBlocks.map((block, index) => (
                         <div
                             key={index}
-                            className={`w-full flex flex-col md:flex-row ${
+                            className={`w-full min-h-[400px] flex flex-col md:flex-row ${
                                 index % 2 !== 0 ? 'md:flex-row-reverse' : '' // Alternar posición de la imagen
                             } items-start  bg-white py-2 `}
                         >
