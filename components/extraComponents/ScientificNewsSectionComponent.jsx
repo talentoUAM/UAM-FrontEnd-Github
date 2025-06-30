@@ -154,7 +154,7 @@ const ScientificNewsSectionComponent = () => {
                                 <Image
                                     src={
                                         mainPost.heroImage?.url
-                                            ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${mainPost.heroImage.url}`
+                                            ? `${process.env.process.env.NEXT_PUBLIC_STRAPI_API_URL}${mainPost.heroImage.url}`
                                             : "/assets/home/poster/hero-video-poster.jpg"
                                     }
                                     alt={mainPost.heroImage?.alternativeText || mainPost.title || "Imagen del artículo principal"}
@@ -193,7 +193,7 @@ const ScientificNewsSectionComponent = () => {
                                     <Image
                                         src={
                                             post.heroImage?.url
-                                                ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${post.heroImage.url}`
+                                                ? `${process.env.process.env.NEXT_PUBLIC_STRAPI_API_URL}${post.heroImage.url}`
                                                 : "/assets/home/poster/hero-video-poster.jpg"
                                         }
                                         alt={post.heroImage?.alternativeText || post.title || "Imagen de artículo secundario"}
