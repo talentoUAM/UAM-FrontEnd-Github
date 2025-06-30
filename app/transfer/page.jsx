@@ -25,36 +25,14 @@ import LoaderComponentInt from "@/components/extraComponents/LoaderComponentInt"
 const Transfer = () => {
     const { locale, pageTransferData } = useGlobalState();
 
-    if (!pageTransferData) {
-        return <p>Loading...</p>;
-    }
+    if (!pageTransferData) return <p>Loading...</p>;
 
     const [isImageLoaded, setIsImageLoaded] = useState(false);
-    const [isImageVisible, setIsImageVisible] = useState(false);
-
     const imageRef = useRef(null);
-    const isInView = useInView(imageRef, { once: true });
+    const isImageInView = useInView(imageRef, { once: true });
 
-    useEffect(() => {
-        if (isInView) {
-        setIsImageVisible(true);
-        }
-    }, [isInView]);
-
-    useEffect(() => {
-        if (!pageTransferData?.image?.url) return;
-
-        const img = new window.Image();
-        img.src = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageTransferData.image.url}`;
-        img.onload = () => setIsImageLoaded(true);
-        img.onerror = () => {
-        console.warn("Error cargando la imagen");
-        setIsImageLoaded(true); // opcional para no bloquear la UI
-        };
-    }, [pageTransferData]);
-
-    const isReady = isImageLoaded && isImageVisible;
-    if (!isReady) return <LoaderComponentInt />
+    const isReady = isImageLoaded && isImageInView;
+    if (!isReady) return <LoaderComponentInt />;
    
     const { title, image, introTextContent, inovactionTextContent, conocimientoTextContent, endTextContent } = pageTransferData;
 
@@ -80,6 +58,11 @@ const Transfer = () => {
                         priority
                         loading="eager"
                         alt="Hero Image"
+                        onLoad={() => setIsImageLoaded(true)}
+                        onError={() => {
+                            console.warn("Error cargando imagen");
+                            setIsImageLoaded(true); // opcional
+                        }}
                         />
                     </div>
                 )}
