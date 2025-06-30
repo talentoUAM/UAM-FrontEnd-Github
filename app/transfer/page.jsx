@@ -2,11 +2,11 @@
 'use client';
 //IMPORTS REACT/NEXT DEPENDENCIES:
 //IMPORTS REACT/NEXT DEPENDENCIES:
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 //IMPORTS EXT DEPENDENCIES:
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 //IMPORTS GLOBAL STATES:
 import { useGlobalState } from "@/context/GlobalStateContext";
 import CustomButton from "@/components/buttons/CustomButton";
@@ -27,14 +27,10 @@ const Transfer = () => {
     //  console.log('pageTransferData', pageTransferData );
      
     
-    const [isImageLoaded, setIsImageLoaded] = useState(false);
-    const imageWrapperRef = useRef(null);
-    const isInView = useInView(imageWrapperRef, { once: true });
-
-    // Mostrar loader hasta que la imagen esté cargada y visible
-    const isReady = isImageLoaded && isInView;
-
-    if (!pageTransferData || !isReady) return <LoaderComponentInt />;
+    // Validación de datos antes de renderizar
+    if ( !pageTransferData) {
+        return <p>Loading...</p>;
+    }
    
     const { title, image, introTextContent, inovactionTextContent, conocimientoTextContent, endTextContent } = pageTransferData;
 
@@ -52,21 +48,14 @@ const Transfer = () => {
             <div className="relative w-full h-[80dvh] flex flex-col justify-end">
                 {/* Hero Image */}
                 {image?.url && (
-                    <div ref={imageWrapperRef} className="w-full h-full relative">
-                        <Image
-                            src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${image.url}`}
-                            fill
-                            className="object-cover"
-                            alt="Hero Image"
-                            priority
-                            loading="eager"
-                            onLoad={() => setIsImageLoaded(true)}
-                            onError={() => {
-                                console.warn('Error cargando la imagen');
-                                setIsImageLoaded(true); // opcional
-                            }}
-                        />
-                    </div>
+                    <Image
+                        className="w-full h-full object-cover"
+                        src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${image.url}`}
+                        fill
+                        priority
+                        loading="eager"
+                        alt="Hero Image"
+                    />
                 )}
 
                 {/* Overlay */}
