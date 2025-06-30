@@ -23,41 +23,25 @@ import LoaderComponentInt from "@/components/extraComponents/LoaderComponentInt"
 
 const Training = () => {
     const { locale, pageTrainingData, trainingProgramsData, trainingPostgradeData  } = useGlobalState();
-     console.log('trainingPostgradeData', trainingPostgradeData );
+    const [isLoading, setIsLoading] = useState(true)
      
-    
-    // Validación de datos antes de renderizar
-    if ( !pageTrainingData || !trainingProgramsData || !trainingPostgradeData ) {
-        return <p>Loading...</p>;
-    }
-
-    const [isReady, setIsReady] = useState(false);
-
     useEffect(() => {
-        const dataReady = pageTrainingData && trainingProgramsData && trainingPostgradeData;
-        if (!dataReady) return;
+        let timer;
+        
+        if (!pageTrainingData || !trainingProgramsData || !trainingPostgradeData ) {
+            setIsLoading(true);
+            
+        } else {
+            // Lógica para cuando pageTrainingData, trainingProgramsData, trainingPostgradeData existe
+            timer = setTimeout(() => {
+                setIsLoading(false);
+            }, 1500);
+        }
 
-        const waitForAllImages = () => {
-            const allImages = Array.from(document.images);
-            const promises = allImages.map((img) => {
-                return new Promise((resolve) => {
-                    if (img.complete && img.naturalHeight !== 0) {
-                        resolve();
-                    } else {
-                        img.onload = resolve;
-                        img.onerror = resolve;
-                    }
-                });
-            });
-            return Promise.all(promises);
+        return () => {
+            if (timer) clearTimeout(timer);
         };
-
-        waitForAllImages().then(() => {
-            setTimeout(() => setIsReady(true), 1500);
-        });
     }, [pageTrainingData, trainingProgramsData, trainingPostgradeData]);
-
-    if (!isReady) return <LoaderComponentInt />;
     
     const sortedTrainingProgramsData = trainingProgramsData.sort((a, b) => b.id - a.id);
     const sortedTrainingPostgradeData = trainingPostgradeData.sort((a, b) => a.id - b.id);

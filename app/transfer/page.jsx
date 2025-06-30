@@ -37,7 +37,7 @@ const Transfer = () => {
             // Lógica para cuando pageTransferData existe
             timer = setTimeout(() => {
                 setIsLoading(false);
-            }, 2000);
+            }, 1500);
         }
 
         return () => {
