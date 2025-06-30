@@ -26,39 +26,58 @@ const Transfer = () => {
    const { locale, pageTransferData } = useGlobalState();
     const [isLoading, setIsLoading] = useState(true);
     const imageContainerRef = useRef(null);
-    const imageRef = useRef(null);
+    const timeoutRef = useRef(null);
+
+    // Verifica si el elemento está visible en el viewport
+    const isInViewport = (element) => {
+        if (!element) return false;
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.bottom >= 0
+        );
+    };
 
     useEffect(() => {
-        if (!pageTransferData || !imageContainerRef.current) return;
+        if (!pageTransferData?.image?.url) return;
 
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    // Cuando el contenedor está en el viewport
-                    const img = new window.Image();
-                    img.src = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageTransferData.image.url}`;
-                    img.onload = () => {
-                        setIsLoading(false);
-                    };
-                    img.onerror = () => {
-                        // Si hay error igualmente ocultamos el loader
-                        setIsLoading(false);
-                    };
+        const checkImageLoad = () => {
+            // 1. Verificar si el contenedor está en el viewport
+            const isVisible = isInViewport(imageContainerRef.current);
+            
+            // 2. Verificar si la imagen está cargada
+            const img = new window.Image();
+            img.src = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageTransferData.image.url}`;
+            
+            img.onload = () => {
+                if (isVisible) {
+                    setIsLoading(false);
+                    if (timeoutRef.current) clearTimeout(timeoutRef.current);
                 }
-            },
-            {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.01
-            }
-        );
+            };
 
-        observer.observe(imageContainerRef.current);
+            img.onerror = () => {
+                setIsLoading(false);
+                if (timeoutRef.current) clearTimeout(timeoutRef.current);
+            };
+        };
+
+        // Timeout de seguridad (8 segundos máximo)
+        timeoutRef.current = setTimeout(() => {
+            setIsLoading(false);
+        }, 8000);
+
+        // Verificación inicial
+        checkImageLoad();
+
+        // Event listeners para scroll y resize
+        window.addEventListener('scroll', checkImageLoad);
+        window.addEventListener('resize', checkImageLoad);
 
         return () => {
-            if (imageContainerRef.current) {
-                observer.unobserve(imageContainerRef.current);
-            }
+            window.removeEventListener('scroll', checkImageLoad);
+            window.removeEventListener('resize', checkImageLoad);
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
         };
     }, [pageTransferData]);
 
@@ -67,7 +86,6 @@ const Transfer = () => {
     }
 
     const { title, image, introTextContent, inovactionTextContent, conocimientoTextContent, endTextContent } = pageTransferData;
-
     return (
         <>
             {isLoading && <LoaderComponentInt />}
@@ -90,6 +108,12 @@ const Transfer = () => {
                             priority
                             loading="eager"
                             alt="Hero Image"
+                            onLoad={() => {
+                                if (isInViewport(imageContainerRef.current)) {
+                                    setIsLoading(false);
+                                }
+                            }}
+                            onError={() => setIsLoading(false)}
                         />
                     )}
 
