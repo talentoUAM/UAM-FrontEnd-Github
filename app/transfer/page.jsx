@@ -25,21 +25,27 @@ import LoaderComponentInt from "@/components/extraComponents/LoaderComponentInt"
 const Transfer = () => {
     const { locale, pageTransferData } = useGlobalState();
     //  console.log('pageTransferData', pageTransferData );
-    const [IsLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true)
      
     useEffect(() => {
-        // Simulación de una espera de 2 segundos
-        const timer = setTimeout(() => {
-          setIsLoading(false);
-        }, 2000);
-    
-        // Limpieza del timer si el componente se desmonta antes de que termine el tiempo
-        return () => clearTimeout(timer);
-      }, []);
-    // Validación de datos antes de renderizar
-    if ( !pageTransferData && !IsLoading) {
-        return <LoaderComponentInt />;
-    }
+        let timer;
+        
+        if (!pageTransferData) {
+            setIsLoading(true);
+            
+        } else {
+            // Lógica para cuando pageTransferData existe
+            timer = setTimeout(() => {
+                setIsLoading(false);
+            }, 2000);
+        }
+
+        return () => {
+            if (timer) clearTimeout(timer);
+        };
+    }, [pageTransferData]);
+      
+ 
    
     const { title, image, introTextContent, inovactionTextContent, conocimientoTextContent, endTextContent } = pageTransferData;
 
