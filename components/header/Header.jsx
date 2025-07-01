@@ -54,7 +54,7 @@ const header = () => {
                         className="hidden xl:block max-h-[40px]"
                         src="/assets/logos/logo-UAM-horizontal-compuesto.png"
                         width={400} 
-                        height={50}
+                        height={45}
                         priority
                         style={{ color: '#473936', width: 'auto', height: 'auto' }} 
                         alt="Logo UAM horizontal"
@@ -75,7 +75,7 @@ const header = () => {
                 {/* Mobile Nav Trigger */}
                 <div className="lg:hidden cursor-pointer" onClick={() => setMobileNav(!mobileNav)}>
                     {/* Animated Hamburger Icon */}
-                    <motion.div initial={false} animate={mobileNav ? "open" : "closed"} className="relative w-8 h-8 flex flex-col justify-center items-center space-y-2">
+                    <motion.div initial={false} animate={mobileNav ? "open" : "closed"} className="relative w-6 h-6 flex flex-col justify-center items-center space-y-2">
                         <motion.span
                             className="block h-0.5 w-full bg-primary"
                             variants={{
