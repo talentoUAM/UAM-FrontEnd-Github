@@ -21,6 +21,9 @@ import LoaderComponentInt from "@/components/extraComponents/LoaderComponentInt"
 //IMPORT ENV:
 
 const Investigation = () => {
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+    }, []);
     const { locale, pageResearchData, researchLinesData, researchFeaturesData, researchPublicationsData, researchTesisData  } = useGlobalState();
     // console.log('pageAboutBlocks', pageAboutBlocks);
     // console.log('pageAboutTeamData', pageAboutTeamData);

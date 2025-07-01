@@ -19,6 +19,10 @@ import { FaSquare } from "react-icons/fa";
 //IMPORT ENV:
 
 const page = () => {
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+    }, []);
+    
     const router = useRouter();
     const { locale } = router; // Obtén el `locale` actual
     const { pageLegalNoticeData } = useGlobalState([]);

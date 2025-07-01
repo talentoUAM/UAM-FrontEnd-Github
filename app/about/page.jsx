@@ -19,6 +19,10 @@ import LoaderComponentInt from "@/components/extraComponents/LoaderComponentInt"
 
 
 const About = () => {
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+    }, []);
+    
     const {
         locale,
         pageAboutData,

@@ -18,6 +18,9 @@ import { FaSquare } from "react-icons/fa";
 //IMPORT ENV:
 
 const page = () => {
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+    }, []);
 
     const { pageContactData } = useGlobalState([]);
     // console.log('pageContactData', pageContactData);

@@ -22,6 +22,10 @@ import LoaderComponentInt from "@/components/extraComponents/LoaderComponentInt"
 //IMPORT ENV:
 
 const Training = () => {
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+    }, []);
+    
     const { locale, pageTrainingData, trainingProgramsData, trainingPostgradeData  } = useGlobalState();
     const [isLoading, setIsLoading] = useState(true)
      

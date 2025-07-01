@@ -25,8 +25,11 @@ import Loader from "@/components/extraComponents/LoaderComponent";
 //IMPORT ENV:
 
 export default function Home() {
+    useEffect(() => {
+          window.scrollTo({ top: 0, behavior: 'instant' });
+      }, []);
 
-  const { isMobile, setIsMobile, isLoading, setIsLoading } = useGlobalState();
+    const { isMobile, setIsMobile, isLoading, setIsLoading } = useGlobalState();
   
   
 

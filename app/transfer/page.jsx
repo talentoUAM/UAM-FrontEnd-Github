@@ -23,6 +23,10 @@ import LoaderComponentInt from "@/components/extraComponents/LoaderComponentInt"
 //IMPORT ENV:
 
 const Transfer = () => {
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+    }, []);
+    
     const { locale, pageTransferData } = useGlobalState();
     //  console.log('pageTransferData', pageTransferData );
     const [isLoading, setIsLoading] = useState(true)

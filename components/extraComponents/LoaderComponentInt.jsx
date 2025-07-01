@@ -16,7 +16,7 @@ const Loader = () => {
                 alt="Logo Talento UAM"
                 loading="eager"
             />
-            <PropagateLoader size='25' color='#F58634'/>
+            <PropagateLoader size={25} color='#F58634'/>
         </div>
     );
 };

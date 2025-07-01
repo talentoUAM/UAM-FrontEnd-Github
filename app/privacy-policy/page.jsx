@@ -16,6 +16,9 @@ import { useGlobalState } from "@/context/GlobalStateContext";
 //IMPORT ENV:
 
 const PrivacyPolicy = () => {
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+    }, []);
 
     const [openIndex, setOpenIndex] = useState(null);
     const { pagePrivacyPolicyData } = useGlobalState([]);

@@ -13,6 +13,11 @@ import { IoTriangle } from "react-icons/io5";
 import Pagination from "@/components/extraComponents/PaginationComponent";
 
 const PostsPage = () => {
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
+
   const { pagePostsData } = useGlobalState();
   const { newsCategoriesData } = useGlobalState();
   const { postsData } = useGlobalState();
