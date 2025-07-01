@@ -51,7 +51,7 @@ const header = () => {
                         alt="Logo Xanasana fisioterapia"
                     /> */}
                     <Image 
-                        className="hidden xl:block"
+                        className="hidden xl:block max-h-[40px]"
                         src="/assets/logos/logo-UAM-horizontal-compuesto.png"
                         width={400} 
                         height={50}

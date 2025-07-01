@@ -123,7 +123,7 @@ const PostsPage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 gap-y-10">
           {paginatedPosts.map((post, index) => (
             <Link key={post.id} href={`/posts/${post.id}`}>
-              <div className="bg-white flex flex-col gap-[10px] group hover:text-accent">
+              <div className="w-full bg-white flex flex-col gap-[10px] group hover:text-accent overflow-hidden">
                 <div className="overflow-hidden relative w-[300px] h-[220px]">
                   <Image
                     src={
@@ -137,7 +137,7 @@ const PostsPage = () => {
                       "Imagen de post"
                     }
                     fill
-                    sizes="(max-width: 300px) 100%, (max-width: 300px) 50%, 192px"
+                    sizes="(max-width: 300px) 100vw, (max-width: 300px) 50vw, 192px"
                     style={{ objectFit: "cover" }}
                     className="object-cover w-full h-[260px] xxs:h-[310px] sm:h-[240px] md:h-[260px] lg:h-[160px] xl:h-[260px] xxl:h-[320px]"
                   />
