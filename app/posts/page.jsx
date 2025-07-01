@@ -142,7 +142,7 @@ const PostsPage = () => {
                       "Imagen de post"
                     }
                     fill
-                    sizes="(max-width: 300px) 100vw, (max-width: 300px) 50vw, 192px"
+                    sizes="100vw"
                     style={{ objectFit: "cover" }}
                     className="object-cover w-full h-[260px] xxs:h-[310px] sm:h-[240px] md:h-[260px] lg:h-[160px] xl:h-[260px] xxl:h-[320px]"
                   />
