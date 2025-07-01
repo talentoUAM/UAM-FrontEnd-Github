@@ -54,7 +54,7 @@ const header = () => {
                         className="hidden xl:block"
                         src="/assets/logos/logo-UAM-horizontal-compuesto.png"
                         width={400} 
-                        height={60}
+                        height={50}
                         priority
                         style={{ color: '#473936', width: 'auto', height: 'auto' }} 
                         alt="Logo UAM horizontal"
