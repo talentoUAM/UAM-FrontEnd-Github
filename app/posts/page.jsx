@@ -129,7 +129,7 @@ const PostsPage = () => {
           {paginatedPosts.map((post, index) => (
             <Link key={post.id} href={`/posts/${post.id}`}>
               <div className="w-full bg-white flex flex-col gap-[10px] group hover:text-accent overflow-hidden">
-                <div className="overflow-hidden relative w-[300px] h-[220px]">
+                <div className="overflow-hidden relative w-full h-[220px]">
                   <Image
                     src={
                       post.heroImage?.url
